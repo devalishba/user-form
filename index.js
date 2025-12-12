@@ -7,12 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// connect mongo
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("DB CONNECTED"))
   .catch(err => console.log(err));
 
-// Schema
+
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// route
+
 app.post("/create-user", async (req, res) => {
   try {
     const newUser = await User.create(req.body);
